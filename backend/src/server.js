@@ -16,7 +16,7 @@ app.use(rateLimiter);
 app.use("/notes",notesRoutes);
 
 app.use(express.static(path.join(__dirname,"../frontend/dist")));
-app.get("*",(res,req) => {
+app.get("*",(req,res) => {
     res.sendFile(path.join(__dirname,"../frontend","dist","index.html"));
 });
 
