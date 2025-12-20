@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 
 if(process.env.NODE_ENV !== "production") {
 app.use(cors({
-      origin: "http://127.0.0.1:5173",
+      origin: "http://127.0.0.1:4173",
     })
 );
 }
