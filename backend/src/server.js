@@ -2,8 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import notesRoutes from "./routes/notesRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 import { connectDB } from "./config/db.js";
-import rateLimiter from "./middleware/rateLimiter.js";
+//import rateLimiter from "./middleware/rateLimiter.js";
 
 dotenv.config();
 
@@ -16,8 +17,10 @@ app.use(cors({
     })
 );
 }
+app.use(cors());
 app.use(express.json());
-app.use(rateLimiter);
+// app.use(rateLimiter);
+app.use("/api/auth", authRoutes);
 app.use("/api/notes",notesRoutes);
 
 if (process.env.NODE_ENV === "production") {
