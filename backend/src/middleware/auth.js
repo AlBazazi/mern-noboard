@@ -6,7 +6,7 @@ export default function authenticateToken(req, res, next) {
 
   const token = authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : authHeader;
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || "your_jwt_secret_key");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = { id: decoded.id, email: decoded.email };
     next();
   } catch (error) {

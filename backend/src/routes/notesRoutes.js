@@ -4,9 +4,7 @@ import authenticateToken from "../middleware/auth.js";
 
 const router = express.Router();
 
-// protect all notes routes - user must be authenticated
 router.use(authenticateToken);
-
 router.get("/", getNotes);
 router.post("/", createNote);
 router.get("/:id", getNoteById);
