@@ -10,18 +10,8 @@ const Home = () => {
   const [isRateLimited, setIsRateLimited] = useState(false);
   const [notes,setNotes] = useState([]);
   const [loading,setLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsAuthenticated(!!token);
-
-    if (!token) {
-      // Guest view: don't fetch notes from protected API
-      setLoading(false);
-      return;
-    }
-
     const fetchNotes = async () => {
       try {
         const res = await api.get("/notes");
@@ -50,18 +40,7 @@ const Home = () => {
       <div className="max-w-7xl mx-auto p-4 mt-6">
         {loading && <div className="text-center text-ghost py-10">Loading...</div>}
 
-        {!isAuthenticated && !loading && (
-          <div className="text-center py-16">
-            <h2 className="text-3xl font-semibold text-white mb-4">Welcome to Noboard</h2>
-            <p className="text-gray-400 mb-6">Sign in to create and manage your private notes.</p>
-            <div className="flex justify-center gap-4">
-              <a href="/login" className="btn btn-primary">Login</a>
-              <a href="/signup" className="btn btn-secondary">Sign up</a>
-            </div>
-          </div>
-        )}
-
-        {isAuthenticated && !isRateLimited && (
+        {!isRateLimited && (
           <>
             {loading && <div className="text-center text-ghost py-10">Loading notes...</div>}
 
